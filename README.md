@@ -6,14 +6,14 @@ Execute command from Swift:
 
 import Shell
 
-# dull function
+// dull function
 let res = shell("/bin/ls", ["-la"])
 print("output:\n\(res.output)\n\nexit code: \(res.exitCode)")
 
-# string extension
+// string extension
 print("/bin/ls".shell("-la"))
 
-# bang prefix func
+// bang prefix func
 !"ls -la"
 
 ```
