@@ -1,5 +1,6 @@
 import Foundation
 
+@discardableResult
 public func shell(_ cmd: String, _ args: [String] = []) -> (output: String, exitCode: Int) {
     let task = Process()
     let pipe = Pipe()
@@ -32,4 +33,15 @@ extension String {
         let res = Shell.shell(self, args)
         return res.output
     }
+}
+
+@discardableResult
+prefix func ! (_ cmd: String) -> String {
+    let shellCmd = ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/bash"
+    let (out, err) = shell(shellCmd, ["-c", cmd])
+    print(out)
+    if err != 0 {
+        print("Command returned error code: \(err)")
+    }
+    return out
 }
