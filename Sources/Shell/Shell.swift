@@ -35,13 +35,11 @@ public extension String {
     }
 }
 
-@discardableResult
-public prefix func ! (_ cmd: String) -> String {
+public prefix func ! (_ cmd: String) {
     let shellCmd = ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/bash"
     let (out, err) = shell(shellCmd, ["-c", cmd])
     print(out)
     if err != 0 {
         print("Command returned error code: \(err)")
     }
-    return out
 }
