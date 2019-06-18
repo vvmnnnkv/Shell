@@ -28,7 +28,7 @@ public func shell(_ cmd: String, _ args: [String] = []) -> (output: String, exit
     return (output.trimmingCharacters(in: ["\n", "\r"]), exitCode)
 }
 
-extension String {
+public extension String {
     func shell(_ args: String...) -> String {
         let res = Shell.shell(self, args)
         return res.output
@@ -36,7 +36,7 @@ extension String {
 }
 
 @discardableResult
-prefix func ! (_ cmd: String) -> String {
+public prefix func ! (_ cmd: String) -> String {
     let shellCmd = ProcessInfo.processInfo.environment["SHELL"] ?? "/bin/bash"
     let (out, err) = shell(shellCmd, ["-c", cmd])
     print(out)
